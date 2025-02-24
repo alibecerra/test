@@ -9,6 +9,7 @@ public class RayShooter : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
+        //cam = GetComponentInChildren<Camera>();  // Searches child objects
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -27,7 +28,7 @@ public class RayShooter : MonoBehaviour
                 ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
                 if (target != null)
                 {
-                    //Debug.Log("Target hit!");
+                    Debug.Log("Target hit!");
                     target.ReactToHit();
                 }
                 else
@@ -48,9 +49,9 @@ public class RayShooter : MonoBehaviour
 
     private void OnGUI()
     {
-        int size = 12;
+        int size = 24;
         float posX = cam.pixelWidth/2 - size/4;
-        float posY = cam.pixelHeight/4 - size/2;
+        float posY = cam.pixelHeight/2 - size/2;
         GUI.Label(new Rect(posX, posY, size, size), "*");
     }
 }
