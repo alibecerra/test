@@ -1,16 +1,8 @@
 using UnityEngine;
 
-public class GameEvent : MonoBehaviour
+public static class GameEvent
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public const string ENEMY_HIT = "ENEMY_HIT";
+    public const string SPEED_CHANGED = "SPEED_CHANGED";
 }
