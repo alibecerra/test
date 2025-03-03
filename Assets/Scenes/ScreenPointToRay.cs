@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class RayShooter : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class RayShooter : MonoBehaviour
     {
         cam = GetComponent<Camera>();
         //cam = GetComponentInChildren<Camera>();  // Searches child objects
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.visible = false;
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Vector3 point = new Vector3(cam.pixelWidth/2, cam.pixelHeight/2, 0);
             Ray ray = cam.ScreenPointToRay(point);
@@ -29,6 +30,7 @@ public class RayShooter : MonoBehaviour
                 if (target != null)
                 {
                     Debug.Log("Target hit!");
+                    Messenger.Broadcast(GameEvent.ENEMY_HIT);
                     target.ReactToHit();
                 }
                 else

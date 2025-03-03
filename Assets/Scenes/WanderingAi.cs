@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class WanderingAi : MonoBehaviour{
@@ -12,6 +13,22 @@ public class WanderingAi : MonoBehaviour{
     public float obstacleRange = 5.0f;
 
     private bool isAlive;
+
+    public const float _baseSpeed = 3f;
+
+    private void OnEnable()
+    {
+        Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);       
+    }
+    private void OnDisable()
+    {
+        Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+    private void OnSpeedChanged(float value){
+        speed = _baseSpeed * value;
+    }
+
+    
 
     private void Start(){
         isAlive = true;
